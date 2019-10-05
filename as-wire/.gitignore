@@ -2,3 +2,7 @@
 .classpath
 .settings
 target
+.idea
+.vscode
+.factorypath
+bin
