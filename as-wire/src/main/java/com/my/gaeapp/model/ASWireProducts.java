@@ -1,10 +1,20 @@
 package com.my.gaeapp.model;
 
-public class ASWire {
+public class ASWireProducts {
+
+    private long id;
     private String name;
     private String title;
     private String description;
     private String imageUri;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
