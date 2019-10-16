@@ -53,3 +53,16 @@ for Java 7.
 Our usual process is to test, update the versions, then test again before committing back.
 
 [plugin]: http://www.mojohaus.org/versions-maven-plugin/
+
+## To run datastore emulator
+set GOOGLE_APPLICATION_CREDENTIALS=C:\Users\jainm\Documents\git\my-practice-interview\appengine-credentials\my-gaeapp-a93965c1d1ec.json
+
+gcloud beta emulators datastore start --data-dir=C:\Users\jainm\Documents\git\explore-ui\as-wire\src\main\webapp\
+
+
+## To deploy add to appengine with version
+mvn clean package appengine:deploy -Dapp.deploy.projectId=my-gaeapp -Dapp.deploy.version=1-0-0
+
+## To get help for appengine
+mvn appengine:help
+
