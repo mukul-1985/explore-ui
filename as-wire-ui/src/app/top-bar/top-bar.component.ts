@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-top-bar',
@@ -7,9 +8,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor() { }
+  navbarShow:boolean = true;
 
-  ngOnInit() {
-  }
+  constructor(
+    private router: Router
+  ) {
+    this.router.events.subscribe(event => {
+      if (event.constructor.name === "NavigationEnd") {
+        //console.log("-------- " + (<any>event).url.split("/").slice(-1)[0]);
+        if ((<any>event).url.split("/").slice(-1)[0] === '') {
+          this.navbarShow = true;
+        } else {
+          this.navbarShow = false;
+        }
+      }
+    })
+   }
 
+  ngOnInit() { }
+
+ 
+  /*
+   <nav *ngIf="this.currentRoute!=='login'" navigation>
+   </nav>
+   
+    this.router.events.subscribe(event => {
+      if (event.constructor.name === "NavigationEnd") {
+        this.name = (<any>event).url.split("/").slice(-1)[0];
+        this.isLogin = this.currentRoute === 'login';
+      }
+    })
+  */
+   
+    
 }

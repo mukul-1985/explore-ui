@@ -1,1 +1,31 @@
-<p>add-product works!</p>
+<h4>Add Product</h4>
+<form [formGroup]="newProduct" (ngSubmit)="onSubmit(newProduct.value)">
+    <div *ngIf="!imageVisible" class="custom-file">
+        <input type="file" class="custom-file-input" id="imageUri" (change)="uploadFile($event)" required>
+        <label class="custom-file-label" for="customFile">Choose Image</label>
+    </div>
+    <div *ngIf="imageVisible" class="card">
+        <label for="image">
+            <input type="file" name="image" id="image" style="display:none;" (change)="uploadFile($event)" />
+            <img [src]="downloadURL" class="card-img-top img-fluid" alt="..." />
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" class="form-control" placeholder="Enter Name" type="text" formControlName="name" required>
+        <small id="emailHelp" class="form-text text-muted">This is the name of the product.</small>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" formControlName="description" rows="5"></textarea>
+        <small class="form-text text-muted">Add description of the product.</small>
+    </div>
+    <div class="d-flex flex-row">
+        <div class="p-2 flex-fill">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+        </div>
+        <div class="p-2 flex-fill">
+            <a class="btn btn-secondary btn-lg btn-block" href="#" (click)="backToHome()">Back</a>
+        </div>
+    </div>
+</form>
