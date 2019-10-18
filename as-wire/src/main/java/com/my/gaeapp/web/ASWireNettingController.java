@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ASWireNettingController {
     private static final Logger logger = LoggerFactory.getLogger(ASWireNettingController.class);
@@ -20,7 +23,6 @@ public class ASWireNettingController {
     @Autowired
     private QuickstartSample quickstartSample;
 
-    @CrossOrigin
     @GetMapping("/aswire")
     public List<ASWireProducts> get() {
     	logger.info(">>> get aswire detail request");
@@ -46,5 +48,12 @@ public class ASWireNettingController {
     public ASWireProducts datastore(@PathVariable String id) {
         quickstartSample.data();
         return null;
+    }
+
+    @PostMapping(value = "/aswire/add", consumes = "application/json", produces = "application/json")
+    public ASWireProducts addProduct(@RequestBody ASWireProducts product) {
+        logger.info(">>> Adding product: {}", product);
+
+        return product;
     }
 }

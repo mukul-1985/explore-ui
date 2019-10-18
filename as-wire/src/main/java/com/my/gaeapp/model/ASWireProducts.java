@@ -47,6 +47,15 @@ public class ASWireProducts {
 	public void setImageUri(String imageUri) {
 		this.imageUri = imageUri;
 	}
-    
-    
+
+    @Override
+    public String toString() {
+        return "ASWireProducts{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", imageUri='" + imageUri + '\'' +
+                '}';
+    }
 }
