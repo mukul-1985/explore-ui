@@ -15,9 +15,11 @@ import { AswireService } from "../aswire.service";
 export class AddProductComponent implements OnInit {
 
   newProduct: any;
-  uploadPercent: Observable<number>;
+  uploadPercent: number;
   downloadURL: String;
   imageVisible: boolean = false;
+  progressBarVisible: boolean = false;
+  inputFieldVisible: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,27 +36,32 @@ export class AddProductComponent implements OnInit {
   }
 
   uploadFile(event) {
+    this.inputFieldVisible = false;
+    this.imageVisible = false;
+    this.progressBarVisible = false;
     const file = event.target.files[0];
     const filePath = 'as-wire/' + file.name;
     const fileRef = this.fileStorage.ref(filePath);
     const task = this.fileStorage.upload(filePath, file);
 
-    // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(data => {
           this.downloadURL = data;
           this.imageVisible = true;
+          this.progressBarVisible = false;
         })
       })
     )
       .subscribe();
+    this.progressBarVisible = true;
 
-    /*this.uploadPercent.subscribe(data => {
+    // observe percentage changes
+    task.percentageChanges().subscribe(data => {
       console.log("-----------per------" + data);
-    });*/
+      this.uploadPercent = data;
+    });
 
   }
 

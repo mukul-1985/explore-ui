@@ -1,12 +1,18 @@
 <h4>Add Product</h4>
 <form [formGroup]="newProduct" (ngSubmit)="onSubmit(newProduct.value)">
-    <div *ngIf="!imageVisible" class="custom-file">
-        <input type="file" accept="image/*" class="custom-file-input" id="imageUri" (change)="uploadFile($event)" required>
+    <div class="progress" *ngIf="progressBarVisible">
+        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar"
+            [attr.aria-valuenow]="uploadPercent" aria-valuemin="0" aria-valuemax="100" [style.width]="uploadPercent+'%'"></div>
+    </div>
+    <div *ngIf="inputFieldVisible" class="custom-file">
+        <input type="file" accept="image/*" class="custom-file-input" id="imageUri" (change)="uploadFile($event)"
+            required>
         <label class="custom-file-label" for="customFile">Choose Image</label>
     </div>
     <div *ngIf="imageVisible" class="card">
         <label for="image">
-            <input type="file" accept="image/*" name="image" id="image" style="display:none;" (change)="uploadFile($event)" />
+            <input type="file" accept="image/*" name="image" id="image" style="display:none;"
+                (change)="uploadFile($event)" />
             <img [src]="downloadURL" class="card-img-top img-fluid" alt="..." />
         </label>
     </div>
