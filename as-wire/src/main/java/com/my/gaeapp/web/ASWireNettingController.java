@@ -2,6 +2,7 @@ package com.my.gaeapp.web;
 
 import com.my.gaeapp.dao.QuickstartSample;
 import com.my.gaeapp.model.ASWireProducts;
+import com.my.gaeapp.service.ASWireNettingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.List;
 @RestController
 public class ASWireNettingController {
     private static final Logger logger = LoggerFactory.getLogger(ASWireNettingController.class);
+
+    @Autowired
+    private ASWireNettingService asWireNettingService;
 
     @Autowired
     private QuickstartSample quickstartSample;
