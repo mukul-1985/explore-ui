@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -30,22 +29,7 @@ public class ASWireNettingController {
     @GetMapping("/aswire")
     public List<ASWireProducts> get() {
     	logger.info(">>> get aswire detail request");
-    	List<ASWireProducts> aswireList = new ArrayList<ASWireProducts>();
-
-    	for (int i = 0; i < 5; i++) {
-    		ASWireProducts asWire = new ASWireProducts();
-    		asWire.setId(i);
-    		int itemNumber = i + 1;
-            asWire.setName("test name-" + itemNumber);
-            asWire.setTitle("test title-" + itemNumber);
-            asWire.setDescription("this is the test description-" + itemNumber);
-            asWire.setImageUri("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAAC" +
-                    "Qd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYOUXAQ" +
-                    "gwAABFACmHqsnDAAAAAElFTkSuQmCC");
-            aswireList.add(asWire);
-		}
-        
-        return aswireList;
+        return asWireNettingService.getAllProducts();
     }
 
     @GetMapping("/aswire/{id}")
@@ -57,7 +41,6 @@ public class ASWireNettingController {
     @PostMapping(value = "/aswire/add", consumes = "application/json", produces = "application/json")
     public ASWireProducts addProduct(@RequestBody ASWireProducts product) {
         logger.info(">>> Adding product: {}", product);
-
-        return product;
+        return asWireNettingService.addProduct(product);
     }
 }
