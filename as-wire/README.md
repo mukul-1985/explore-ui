@@ -66,3 +66,13 @@ mvn clean package appengine:deploy -Dapp.deploy.projectId=my-gaeapp -Dapp.deploy
 ## To get help for appengine
 mvn appengine:help
 
+## Add below environment variable to connect to datastore emulator
+GOOGLE_CLOUD_PROJECT=my-gaeapp
+DATASTORE_EMULATOR_HOST=localhost:8081
+LOCAL_DATASTORE_PORT=8081
+##### Add above properties to pom.xml like below as environment
+<environment>
+     <GOOGLE_CLOUD_PROJECT>my-gaeapp</GOOGLE_CLOUD_PROJECT>
+     <DATASTORE_EMULATOR_HOST>localhost:8081</DATASTORE_EMULATOR_HOST>
+     <LOCAL_DATASTORE_PORT>8081</LOCAL_DATASTORE_PORT>
+</environment>

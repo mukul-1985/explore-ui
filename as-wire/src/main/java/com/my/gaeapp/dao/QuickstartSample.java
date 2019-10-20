@@ -1,5 +1,9 @@
 package com.my.gaeapp.dao;
 
+import com.google.cloud.datastore.Query;
+import com.google.cloud.datastore.QueryResults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.google.cloud.datastore.Datastore;
@@ -10,7 +14,9 @@ import com.google.cloud.datastore.IncompleteKey;
 
 @Component
 public class QuickstartSample {
-	
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuickstartSample.class);
+
     public void data() {
     	// Instantiates a client
     	Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
@@ -32,13 +38,10 @@ public class QuickstartSample {
 
         System.out.printf("Saved %s: %s%n", bookEntity.getKey().getId(), task.getString("description"));
 
-        //Retrieve entity
-		/*
-		 * Entity retrieved = datastore.get(taskKey);
-		 * 
-		 * System.out.printf("Retrieved %s: %s%n", taskKey.getName(),
-		 * retrieved.getString("description"));
-		 */
-
+        Query<Entity> query = Query.newEntityQueryBuilder().setKind("Task").build();
+        QueryResults<Entity> run = datastore.run(query);
+        while (run.hasNext()) {
+            LOGGER.info(run.next().getString("description"));
+        }
     }
 }
