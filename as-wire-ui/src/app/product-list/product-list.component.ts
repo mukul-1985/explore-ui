@@ -10,11 +10,8 @@ import { AswireService } from "../aswire.service";
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  spinnerVisible:boolean = true;
   products = [];
-
-  share() {
-    window.alert('the prouct has been shared!')
-  }
 
   constructor(
     private aswireService: AswireService
@@ -24,6 +21,8 @@ export class ProductListComponent implements OnInit {
     this.aswireService.getItems().subscribe(( data: any[]) => {
       //console.log(data);
       this.products = data;
+      this.aswireService.products = this.products;
+      this.spinnerVisible = false;
     })
   }
 

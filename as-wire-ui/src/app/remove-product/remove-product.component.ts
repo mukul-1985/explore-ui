@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AswireService } from "../aswire.service";
+
 @Component({
   selector: 'app-remove-product',
   templateUrl: './remove-product.component.html',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RemoveProductComponent implements OnInit {
 
-  constructor() { }
+  products: any;
+
+  constructor(
+    private aswireService: AswireService
+  ) { 
+    this.products = aswireService.products;
+  }
 
   ngOnInit() {
   }
