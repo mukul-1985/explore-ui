@@ -1,5 +1,17 @@
-<p>product-detail</p>
 <div *ngIf="product">
-    <h1>{{ product.title }}</h1>
-    <h3>{{ product.description }}</h3>
+    <div class="d-flex justify-content-center align-items-center text-monospace">
+        <h4>{{ product.title }}</h4>
+    </div>
+    <div class="card">
+        <label for="image">
+            <img [src]="product.imageUri" class="card-img-top img-fluid" alt="..." />
+        </label>
+    </div>
+    <p class="text-monospace">{{ product.description }}</p>
+</div>
+<hr>
+<div class="bg-light p-4 d-flex flex-column justify-content-center align-items-center">
+    <p class="m-0 text-monospace">{{ contactDetails.name }}</p>
+    <p class="m-0 text-monospace">{{ contactDetails.address }}</p>
+    <p class="m-0 text-monospace">{{ contactDetails.phone }}</p>
 </div>

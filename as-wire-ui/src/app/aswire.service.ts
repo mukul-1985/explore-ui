@@ -15,7 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AswireService {
-  items = [];
+  products: any;
 
   constructor(
     private http: HttpClient

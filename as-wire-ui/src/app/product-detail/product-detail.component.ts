@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { products } from '../products';
+import { companyContactDetails } from '../product-constants';
+
+import { AswireService } from "../aswire.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -9,16 +11,22 @@ import { products } from '../products';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  
-  product:any;
+  contactDetails = companyContactDetails;
+  product: any;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private aswireService: AswireService
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.product = products[params.get('id')];
+      for (let i = 0; i < this.aswireService.products.length; i++) {
+        //console.log(">>> " + this.aswireService.products[i].id + " -- " + params.get('id'));
+        if (this.aswireService.products[i].id === +params.get('id')) {
+          this.product = this.aswireService.products[i];
+        }
+      }
     });
   }
 

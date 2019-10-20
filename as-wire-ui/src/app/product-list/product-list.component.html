@@ -12,17 +12,45 @@
         </a>
     </div>
 </div>-->
-
-<div *ngFor="let product of products" class="mt-1">
-    <div class="d-flex flex-row bd-highlight p-0 m-0">
-        <div class="col-2 p-0">
-            <img [src]="product.imageUri" style="width:50px;height:50px;">
-        </div>
-        <div class="col-10" class="m-2 align-self-center">
-            <a [routerLink]="['/products', product.id]">
-                <h4>{{ product.title }}</h4>
-            </a>
-        </div>
+<div *ngIf="spinnerVisible" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-grow text-primary" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
+    <div class="spinner-grow text-secondary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-success" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-danger" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-info" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-light" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-dark" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div *ngIf="spinnerVisible" class="d-flex justify-content-center">
+    <small class="form-text text-muted">Loading products list</small>
+</div>
+<div *ngFor="let product of products" class="mt-1">
+    <a class="text-reset" [routerLink]="['/products', product.id]">
+        <div class="d-flex flex-row bd-highlight p-0 m-0">
+            <div class="col-2 p-0">
+                <img [src]="product.imageUri" style="width:50px;height:50px;">
+            </div>
+            <div class="col-10 p-0 align-self-center">
+                <h5 class="text-monospace font-weight-light">{{ product.title }}</h5>
+            </div>
+        </div>
+    </a>
     <hr class="p-0 m-1">
 </div>
