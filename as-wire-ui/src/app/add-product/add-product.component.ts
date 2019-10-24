@@ -77,6 +77,9 @@ export class AddProductComponent implements OnInit {
   }
 
   backToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/'])
+      .then(() => {
+        window.location.reload();
+      });;
   }
 }

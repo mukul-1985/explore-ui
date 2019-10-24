@@ -22,10 +22,18 @@ export class AswireService {
   ) { }
 
   getItems() {
-    return this.http.get(environment.apiUrl + '/aswire');
+    return this.http.get(environment.apiUrl);
   }
 
   addItem(product): Observable<any> {
-    return this.http.post(environment.apiUrl + '/aswire/add', product, httpOptions);
+    return this.http.post(environment.apiUrl + '/add', product, httpOptions);
+  }
+
+  removeItems(productsList){
+    return this.http.post(environment.apiUrl + "/remove", productsList, httpOptions);
+  }
+
+  updateItem(product) {
+    return this.http.post(environment.apiUrl + "/update", product, httpOptions);
   }
 }
