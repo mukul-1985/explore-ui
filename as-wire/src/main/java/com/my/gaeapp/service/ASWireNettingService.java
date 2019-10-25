@@ -28,4 +28,16 @@ public class ASWireNettingService {
         logger.info(">>> products found in the data store: {}", all);
         return all;
     }
+
+    public ASWireProducts getById(long id) {
+        return asWireNettingProductDao.getById(id);
+    }
+
+    public void removeProducts(List<ASWireProducts> products) {
+        products.forEach(asWireNettingProductDao::remove);
+    }
+
+    public void updateProduct(ASWireProducts product) {
+        asWireNettingProductDao.update(product);
+    }
 }

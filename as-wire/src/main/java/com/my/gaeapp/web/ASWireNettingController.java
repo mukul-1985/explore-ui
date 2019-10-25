@@ -1,6 +1,5 @@
 package com.my.gaeapp.web;
 
-import com.my.gaeapp.dao.QuickstartSample;
 import com.my.gaeapp.model.ASWireProducts;
 import com.my.gaeapp.service.ASWireNettingService;
 import org.slf4j.Logger;
@@ -23,9 +22,6 @@ public class ASWireNettingController {
     @Autowired
     private ASWireNettingService asWireNettingService;
 
-    @Autowired
-    private QuickstartSample quickstartSample;
-
     @GetMapping("/aswire")
     public List<ASWireProducts> get() {
     	logger.info(">>> get aswire detail request");
@@ -33,14 +29,25 @@ public class ASWireNettingController {
     }
 
     @GetMapping("/aswire/{id}")
-    public ASWireProducts datastore(@PathVariable String id) {
-        quickstartSample.data();
-        return null;
+    public ASWireProducts getById(@PathVariable long id) {
+        return asWireNettingService.getById(id);
     }
 
     @PostMapping(value = "/aswire/add", consumes = "application/json", produces = "application/json")
     public ASWireProducts addProduct(@RequestBody ASWireProducts product) {
         logger.info(">>> Adding product: {}", product);
         return asWireNettingService.addProduct(product);
+    }
+
+    @PostMapping(value = "/aswire/remove", consumes = "application/json")
+    public String removeProducts(@RequestBody List<ASWireProducts> products) {
+        asWireNettingService.removeProducts(products);
+        return "Products removed successfully";
+    }
+
+    @PostMapping(value = "/aswire/update", consumes = "application/json")
+    public String updateUproduct(@RequestBody ASWireProducts product) {
+        asWireNettingService.updateProduct(product);
+        return "Product updated successfully";
     }
 }
