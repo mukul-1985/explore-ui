@@ -41,6 +41,7 @@
 <div *ngIf="spinnerVisible" class="d-flex justify-content-center">
     <small class="form-text text-muted">Loading products list</small>
 </div>
+
 <div *ngFor="let product of products" class="mt-1">
     <a class="text-reset" [routerLink]="['/products', product.id]">
         <div class="d-flex flex-row bd-highlight p-0 m-0">
