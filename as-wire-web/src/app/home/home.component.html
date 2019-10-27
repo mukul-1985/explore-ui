@@ -1,0 +1,22 @@
+<div class="bg-dark">
+    <div id="productsCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li *ngFor="let product of products; let i = index" [ngClass]="i == 0?'active':''"
+                data-target="#productsCarousel" [attr.data-slide-to]="i"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div *ngFor="let product of products; let i = index"
+                [ngClass]="i == 0?'carousel-item active' : 'carousel-item'">
+                <img style="width: 300px;" src="{{product.imageUri}}">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#productsCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" href="#productsCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+    </div>
+</div>
