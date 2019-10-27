@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { FormBuilder } from "@angular/forms";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { finalize } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 import { AswireService } from "../aswire.service";
 
@@ -77,6 +76,9 @@ export class AddProductComponent implements OnInit {
   }
 
   backToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/'])
+      .then(() => {
+        window.location.reload();
+      });;
   }
 }

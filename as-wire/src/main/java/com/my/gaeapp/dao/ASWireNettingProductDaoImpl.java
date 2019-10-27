@@ -5,8 +5,10 @@ import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.FullEntity;
 import com.google.cloud.datastore.IncompleteKey;
+import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
+import com.google.cloud.datastore.KeyFactory;
 import com.my.gaeapp.model.ASWireProducts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,7 @@ public class ASWireNettingProductDaoImpl {
 
     private Datastore datastore;
     private String kind;
-    private IncompleteKey productKey;
+    private KeyFactory productKeyFactory;
 
     @PostConstruct
     public void setup() {
@@ -32,12 +34,12 @@ public class ASWireNettingProductDaoImpl {
         // The kind for the new entity
         this.kind = "ASWireProducts";
         // The Cloud Datastore key for the new entity
-        this.productKey = datastore.newKeyFactory().setKind(kind).newKey();
+        this.productKeyFactory = datastore.newKeyFactory().setKind(kind);
     }
 
     public ASWireProducts add(ASWireProducts products) {
         // Prepares the new entity
-        FullEntity<IncompleteKey> task = Entity.newBuilder(productKey)
+        FullEntity<IncompleteKey> task = Entity.newBuilder(productKeyFactory.newKey())
                 .set("name", products.getName())
                 .set("title", products.getTitle())
                 .set("description", products.getDescription())
@@ -60,6 +62,27 @@ public class ASWireNettingProductDaoImpl {
         }
 
         return products;
+    }
+
+    public ASWireProducts getById(long id) {
+        Entity productEntity = datastore.get(productKeyFactory.newKey(id));
+        return transformProductFromEntity(productEntity);
+    }
+
+    public void update(ASWireProducts product) {
+        Key key = productKeyFactory.newKey(product.getId());
+        Entity entity = Entity.newBuilder(key)
+                .set("name", product.getName())
+                .set("title", product.getTitle())
+                .set("description", product.getDescription())
+                .set("imageUri", product.getImageUri())
+                .build();
+        datastore.update(entity);
+    }
+
+    public void remove(ASWireProducts products) {
+        Key key = productKeyFactory.newKey(products.getId());
+        datastore.delete(key);
     }
 
     private ASWireProducts transformProductFromEntity(Entity productEntity) {

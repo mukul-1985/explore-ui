@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container">
         <div>
             <a *ngIf="!navbarShow" class="navbar-brand mb-0 h1" href="/"><i class="fa fa-home"></i> Home</a>
@@ -11,14 +11,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active" role="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-                    <a class="nav-link"  [routerLink]="['/add']">Add</a>
+                <li *ngIf="navbarAdd" class="nav-item active" role="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent">
+                    <a class="nav-link" [routerLink]="['/add']">Add</a>
                 </li>
-                <li class="nav-item" role="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-                    <a class="nav-link"  [routerLink]="['/remove']">Remove</a>
+                <li *ngIf="navbarRemove" class="nav-item active" role="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent">
+                    <a class="nav-link" [routerLink]="['/remove']">Remove</a>
                 </li>
-                <li class="nav-item" role="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-                    <a class="nav-link"  [routerLink]="['/edit']">Edit</a>
+                <li *ngIf="navbarEdit" class="nav-item active" role="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent">
+                    <a class="nav-link" [routerLink]="['/edit', productsId]">Edit</a>
+                </li>
+                <li *ngIf="navbarHome" class="nav-item active" role="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent">
+                    <a class="nav-link" [routerLink]="['/']">Home</a>
                 </li>
             </ul>
         </div>

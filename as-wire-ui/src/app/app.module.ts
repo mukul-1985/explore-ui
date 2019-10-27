@@ -35,7 +35,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
       { path: 'products/:id', component: ProductDetailComponent},
       { path: 'add', component: AddProductComponent},
       { path: 'remove', component: RemoveProductComponent},
-      { path: 'edit', component: EditProductComponent}
+      { path: 'edit/:id', component: EditProductComponent}
     ]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
