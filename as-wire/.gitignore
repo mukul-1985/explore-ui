@@ -6,6 +6,3 @@ target
 .vscode
 .factorypath
 bin
-
-
-src/main/webapp/WEB-INF/appengine-generated/local_db.bin
