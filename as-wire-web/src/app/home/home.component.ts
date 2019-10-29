@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
       console.log(data);
       this.products = data;
       //this.aswireService.products = this.products;
-      this.spinnerVisible = false;
+      this.spinnerVisible = false; 
     })
   }
 
