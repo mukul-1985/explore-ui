@@ -76,3 +76,6 @@ LOCAL_DATASTORE_PORT=8081
      <DATASTORE_EMULATOR_HOST>localhost:8081</DATASTORE_EMULATOR_HOST>
      <LOCAL_DATASTORE_PORT>8081</LOCAL_DATASTORE_PORT>
 </environment>
+
+# Git Hub Repo for all the emulators
+https://github.com/googleapis/google-cloud-java/blob/master/TESTING.md#testing-code-that-uses-storage
